@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ quiz_type }} Quiz</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .question-card {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        .options-container {
+            margin-left: 20px;
+        }
+        .timer {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #222;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1 class="text-center mb-4">{{ quiz_type }} Quiz</h1>
+        
+        <form method="POST" action="">
+            {% for question in questions %}
+            <div class="question-card">
+                <h5>Question {{ loop.index }}: {{ question.question }}</h5>
+                <div class="options-container">
+                    {% for option in question.options %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" 
+                               name="q{{ loop.index0 }}" 
+                               id="q{{ loop.index0 }}-{{ loop.index }}" 
+                               value="{{ option }}">
+                        <label class="form-check-label" for="q{{ loop.index0 }}-{{ loop.index }}">
+                            {{ option }}
+                        </label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+            
+            <input type="hidden" name="start_time" value="{{ start_time }}">
+            <button type="submit" class="btn btn-primary btn-block">Submit Quiz</button>
+        </form>
+    </div>
+
+    <script>
+        let totalTime = 600; // 10 minutes in seconds
+        let timerDisplay = document.createElement("div");
+        timerDisplay.className = "timer";
+        document.body.appendChild(timerDisplay);
+
+        function updateTimer() {
+            let minutes = Math.floor(totalTime / 60);
+            let seconds = totalTime % 60;
+            timerDisplay.innerText = `Time Left: ${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+            totalTime--;
+            if (totalTime < 0) {
+                document.forms[0].submit(); // auto-submit
+            } else {
+                setTimeout(updateTimer, 1000);
+            }
+        }
+        updateTimer();
+    </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            font-weight: bold;
+            background-color: #f8f9fa;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="display-4">Admin Dashboard</h1>
+            <div>
+                <a href="/logout" class="btn btn-outline-danger">Logout</a>
+                <a href="/" class="btn btn-outline-primary">Home</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                User Management
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Email</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Populate user list here -->
+                            <tr>
+                                <td>user@example.com</td>
+                                <td>
+                                    <button class="btn btn-sm btn-warning" onclick="editUser('user@example.com')">Edit</button>
+                                    <button class="btn btn-sm btn-danger" onclick="confirmDelete('user@example.com')">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <form action="{{ url_for('modify_user') }}" method="post" class="mt-4">
+                    <h5>Update User Password</h5>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="email">User Email</label>
+                            <input type="email" class="form-control" name="email" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="new_password">New Password</label>
+                            <input type="password" class="form-control" name="new_password" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Password</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                Question Management
+            </div>
+            <div class="card-body">
+                <form action="{{ url_for('add_question') }}" method="post">
+                    <div class="form-group">
+                        <label for="quiz_type">Quiz Type</label>
+                        <select name="quiz_type" class="form-control">
+                            <option value="Technical">Technical</option>
+                            <option value="Astronomy">Astronomy</option>
+                            <option value="Entertainment">Entertainment</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="question">Question</label>
+                        <input type="text" class="form-control" name="question" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>Option 1</label>
+                            <input type="text" class="form-control" name="option1" required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Option 2</label>
+                            <input type="text" class="form-control" name="option2" required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Option 3</label>
+                            <input type="text" class="form-control" name="option3" required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Option 4</label>
+                            <input type="text" class="form-control" name="option4" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="answer">Correct Answer</label>
+                        <input type="text" class="form-control" name="answer" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Add Question</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

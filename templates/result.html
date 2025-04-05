@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .result-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .score-display {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+        .question-review {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+        }
+        .correct-answer {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .user-correct {
+            background-color: #d4edda;
+        }
+        .user-incorrect {
+            background-color: #f8d7da;
+        }
+        .performance-summary {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="result-container">
+        <h1 class="text-center mb-4">Quiz Results</h1>
+        
+        <div class="score-display text-center">
+            You scored <span class="font-weight-bold">{{ score }}/10</span> points
+        </div>
+
+        <h3>Question Review:</h3>
+        {% for question in questions %}
+        <div class="question-review {% if user_answers[loop.index0] == question.answer %}user-correct{% else %}user-incorrect{% endif %}">
+            <h5>Question {{ loop.index }}: {{ question.question }}</h5>
+            <div class="options">
+                {% for option in question.options %}
+                <div>
+                    {% if option == question.answer %}
+                        <span class="correct-answer">✓ {{ option }}</span> (Correct Answer)
+                    {% elif option == user_answers[loop.index0] %}
+                        <span class="text-danger">✗ {{ option }}</span> (Your Answer)
+                    {% else %}
+                        {{ option }}
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="performance-summary">
+            <h4>Performance Summary</h4>
+            <p>You answered {{ score }} out of 10 questions correctly ({{ (score/10*100)|round|int }}%)</p>
+            {% if score >= 8 %}
+            <p class="text-success">Excellent work!</p>
+            {% elif score >= 5 %}
+            <p class="text-primary">Good effort!</p>
+            {% else %}
+            <p class="text-warning">Keep practicing!</p>
+            {% endif %}
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="/" class="btn btn-primary">Return to Home</a>
+            {% if 'user' in session %}
+            <a href="/user" class="btn btn-secondary">Back to Dashboard</a>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

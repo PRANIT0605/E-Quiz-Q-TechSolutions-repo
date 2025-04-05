@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Quiz Registration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            font-family: Arial, sans-serif;
+        }
+        .sidebar {
+            width: 25%;
+            background: #f4f4f4;
+            border-right: 2px solid #ccc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .sidebar .profile-container {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .sidebar button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+        }
+        
+        /* Content Section */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 40px;
+        }
+        
+        /* Heading Styles */
+        .content h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .content p {
+            font-size: 1.5rem;
+            margin-bottom: 40px; 
+        }
+        
+        #register-tag {
+            font-size: 2rem;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            text-align: center;
+        }
+
+        /* Form Centering */
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        form {
+            width: 400px;
+            padding: 30px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="profile-container">
+        <img src="{{ url_for('static', filename='images/user_profile.jpg') }}" 
+             alt="Profile Image" 
+             style="width: 100px; height: 100px; border-radius: 50%; box-shadow: 0 0 10px rgba(0,0,0,0.2);">
+    </div>
+    <button class="btn btn-success">Profile</button>
+</div>
+
+<div class="main-content">
+    <div class="content">
+        <h1>E-Quiz Application</h1>
+        <p id="register-tag">Register</p>
+    </div>
+
+    <div class="form-container">
+<form action="{{ url_for('register') }}" method="POST">
+
+            <div class="mb-3">
+                <label for="exampleInputName1" class="form-label">Name</label>
+                <input type="text" class="form-control" id="exampleInputName1" name="name">
+
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp">
+
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword2" name="password">
+
+            </div>
+            <button type="submit" class="btn btn-primary w-100 mb-3">Submit</button>
+            <a href="{{ url_for('index') }}" class="btn btn-primary">Back to Home</a>
+
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

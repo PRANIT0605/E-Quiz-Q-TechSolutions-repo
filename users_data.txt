@@ -1,0 +1,10 @@
+pranitgore@gmail.com,abcdef
+siddharth@gmail.com,pqrst
+admin@quiz.com,admin123
+testuser@example.com,test123
+Mayur@gmail.com,123456
+,
+pranitgore0567@gmail.com,1234567
+Soham@gmail.com,789456
+pranitgore123@gmail.com,123
+Tushar@gmail.com,tushar

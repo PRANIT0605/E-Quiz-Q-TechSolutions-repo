@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .quiz-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            background-color: #f8f9fa;
+        }
+        .quiz-btn {
+            margin: 0.5rem 0;
+            padding: 1rem;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        .quiz-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container text-center">
+        <h1 class="mb-4">Welcome To E-Quiz</h1>
+        <p class="lead mb-4">Choose your quiz topic:</p>
+        
+        <div class="d-flex flex-column">
+            <a href="{{ url_for('quiz', quiz_type='technical') }}" class="btn btn-primary quiz-btn">
+                <i class="fas fa-laptop-code mr-2"></i> Technical Quiz
+            </a>
+            <a href="{{ url_for('quiz', quiz_type='entertainment') }}" class="btn btn-success quiz-btn">
+                <i class="fas fa-film mr-2"></i> Entertainment Quiz
+            </a>
+            <a href="{{ url_for('quiz', quiz_type='astronomy') }}" class="btn btn-info quiz-btn">
+                <i class="fas fa-star mr-2"></i> Astronomy Quiz
+            </a>
+        </div>
+
+        <a href="{{ url_for('index') }}" class="btn btn-outline-secondary mt-4">
+            <i class="fas fa-home mr-2"></i> Back to Home
+        </a>
+    </div>
+    
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
